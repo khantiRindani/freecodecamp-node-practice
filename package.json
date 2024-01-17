@@ -1,19 +1,15 @@
 {
-	"name": "fcc-learn-npm-package-json",
-	"author": "Khanti Rindani",
-	"description": "Freecodecamp Backend Curriculum Practice ",
-	"keywords": ["khanti", "node-practice", "freecodecamp"],
+	"name": "fcc-learn-node-with-express",
+	"version": "0.1.0",
 	"dependencies": {
-		"express": "^4.14.0"
+	  "body-parser": "^1.15.2",
+	  "cookie-parser": "^1.4.3",
+	  "dotenv": "^16.0.1",
+	  "express": "^4.14.0",
+	  "fcc-express-bground": "https://github.com/freeCodeCamp/fcc-express-bground-pkg.git"
 	},
-	"license": "MIT",
-	"version": "1.0.0",
 	"main": "server.js",
 	"scripts": {
-		"start": "node server.js"
-	},
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/freeCodeCamp/boilerplate-npm.git"
+	  "start": "node server.js"
 	}
-}
+  }
