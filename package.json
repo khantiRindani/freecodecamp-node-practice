@@ -5,7 +5,7 @@
 	"keywords": ["khanti", "node-practice", "freeCodeCamp"],
 	"dependencies": {
 		"express": "^4.14.0",
-		"freecodecamp/example": "1.1.0"
+		"freecodecamp-example": "1.1.0"
 	},
 	"license": "MIT",
 	"version": "1.0.0",
