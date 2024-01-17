@@ -2,7 +2,7 @@
 	"name": "fcc-learn-npm-package-json",
 	"author": "Khanti Rindani",
 	"description": "Freecodecamp Backend Curriculum Practice ",
-	"keywords": ["khanti", "node-practice", "freeCodeCamp"],
+	"keywords": ["khanti", "node-practice", "freecodecamp"],
 	"dependencies": {
 		"express": "^4.14.0",
 		"@freecodecamp/example": "1.1.0"
