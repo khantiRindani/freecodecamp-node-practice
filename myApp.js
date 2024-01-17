@@ -10,5 +10,9 @@ app.use((req, res, next)=>{
 
 app.get("/", (req, res) => res.sendFile(__dirname + "/views/index.html"));
 app.get("/json", (req, res) => res.json({"message": process.env.MESSAGE_STYLE === "uppercase" ? "HELLO JSON" : "Hello json"}));
+app.get("/now", (req, res, next) => {
+    req.time = new Date().toString();
+    next();
+}, (req, res) => res.json({"time": req.time}));
 
 module.exports = app;
