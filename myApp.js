@@ -19,6 +19,6 @@ app.get("/now", (req, res, next) => {
 app.get("/:word/echo", (req, res) => res.json({"echo": req.params.word}));
 
 const nameHandler = (req, res) => res.json({"name": req.query.first+ " " + req.query.last});
-app.route("/name").get(nameHandler).post(nameHandler);
+app.route("/name").get(nameHandler).post((req, res) => res.json({"name": req.body.first+ " " + req.body.last}));
 
 module.exports = app;
