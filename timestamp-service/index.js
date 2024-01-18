@@ -25,13 +25,14 @@ app.get("/api/hello", (req, res) => {
 });
 
 const timeHandler = (req, res) => {
-    try{
-      const date = !req.params.dateTime ? new Date() : new Date(req.params.dateTime);
-      res.json({unix: date.getTime(), utc: date.toUTCString()});
-    } catch(error) {
-      res.json({error: "Invalid Date"});
-    }
-  };
+  const dateQuery = req.params.dateTime;
+  const date = !dateQuery ? new Date() : (dateQuery.search("-") >= 0 ? new Date(dateQuery) : new Date(Number(dateQuery)));
+  if(date && date.getTime()) {
+    res.json({unix: date.getTime(), utc: date.toUTCString()});
+  } else {
+    res.json({error: "Invalid Date"});
+  }
+};
 app.get("/api/", timeHandler);
 app.get("/api/:dateTime", timeHandler);
 
