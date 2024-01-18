@@ -13,26 +13,23 @@ const Person = mongoose.model("Person", personSchema);
 
 const createAndSavePerson = (done) => {
     const doc = new Person({"name": "test", "age": 20, "favoriteFoods": ["apple"]});
-    doc.save((err, data)=>{
-        if(err) {console.log(err);}
-        done(null, data);
-    });
+    doc.save(done);
 };
 
 const createManyPeople = (arrayOfPeople, done) => {
-    Person.create(arrayOfPeople).then((data) => done(null, data));
+    Person.create(arrayOfPeople, done);
 };
 
 const findPeopleByName = (personName, done) => {
-  done(null /*, data*/);
+    Person.find({name: personName}, done);
 };
 
 const findOneByFood = (food, done) => {
-  done(null /*, data*/);
+    Person.findOne({favoriteFoods: food}, done);
 };
 
 const findPersonById = (personId, done) => {
-  done(null /*, data*/);
+    Person.findById(personId, done);
 };
 
 const findEditThenSave = (personId, done) => {
