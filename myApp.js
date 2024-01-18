@@ -34,24 +34,27 @@ const findPersonById = (personId, done) => {
 
 const findEditThenSave = (personId, done) => {
   const foodToAdd = "hamburger";
-
-  done(null /*, data*/);
+  Person.findById(personId, (err, person) => {
+        person.favoriteFoods.push(foodToAdd);
+        person.save(done);
+  });
 };
 
 const findAndUpdate = (personName, done) => {
   const ageToSet = 20;
-
-  done(null /*, data*/);
+  Person.findOneAndUpdate({name: personName}, (err, person) => {
+    person.age = ageToSet;
+ }, { new: true }, done);
 };
 
 const removeById = (personId, done) => {
-  done(null /*, data*/);
+  Person.findByIdAndDelete(personId, done);
 };
 
 const removeManyPeople = (done) => {
   const nameToRemove = "Mary";
 
-  done(null /*, data*/);
+  Person.deleteMany({name: nameToRemove}, done);
 };
 
 const queryChain = (done) => {
