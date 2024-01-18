@@ -42,7 +42,7 @@ const findEditThenSave = (personId, done) => {
 
 const findAndUpdate = (personName, done) => {
   const ageToSet = 20;
-  Person.findOneAndUpdate({name: personName}, {age: ageToSet}, { new: true }, done);
+  Person.findOneAndUpdate({name: personName}, {age: ageToSet}, {new: true}, done);
 };
 
 const removeById = (personId, done) => {
@@ -58,7 +58,10 @@ const removeManyPeople = (done) => {
 const queryChain = (done) => {
   const foodToSearch = "burrito";
 
-  done(null /*, data*/);
+  Person.find({favoriteFoods: foodToSearch})
+  .sort("name")
+  .limit(2)
+  .exec(done);
 };
 
 /** **Well Done !!**
