@@ -26,7 +26,7 @@ app.get("/api/hello", (req, res) => {
 
 const timeHandler = (req, res) => {
   const dateQuery = req.params.dateTime;
-  const date = !dateQuery ? new Date() : (dateQuery.search("-") >= 0 ? new Date(dateQuery) : new Date(Number(dateQuery)));
+  const date = !dateQuery ? new Date() : (Number(dateQuery) ? new Date(Number(dateQuery)) : new Date(dateQuery));
   if(date && date.getTime()) {
     res.json({unix: date.getTime(), utc: date.toUTCString()});
   } else {
