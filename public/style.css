@@ -45,3 +45,8 @@ li {
 a {
 	color: #2574A9;
 }
+
+fieldset {
+	width: fit-content;
+	margin: auto;
+}

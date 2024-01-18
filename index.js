@@ -6,6 +6,10 @@ require('dotenv').config();
 const express = require('express');
 const app = express();
 
+const bodyParser = require('body-parser');
+
+app.use(bodyParser.urlencoded({extended: false}));
+
 // enable CORS (https://en.wikipedia.org/wiki/Cross-origin_resource_sharing)
 // so that your API is remotely testable by FCC 
 const cors = require('cors');
@@ -21,6 +25,9 @@ app.use("/timestamp", timestampRouter);
 
 const headerparserRouter = require('./headerparser');
 app.use("/headerparser", headerparserRouter);
+
+const urlshortenerRouter = require('./urlshortener');
+app.use("/urlshortener", urlshortenerRouter);
 
 // listen for requests :)
 const listener = app.listen(process.env.PORT || 3000, function () {
