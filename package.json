@@ -1,0 +1,21 @@
+{
+	"name": "khanti-fcc-api-projects",
+	"version": "0.1.0",
+	"description": "Khanti's Submission on FCC Backend Certification Challenges",
+	"main": "index.js",
+	"scripts": {
+		"start": "node index.js"
+	},
+	"dependencies": {
+		"cors": "^2.8.0",
+		"dotenv": "^16.3.1",
+		"express": "^4.12.4"
+	},
+	"author": "Khanti Rindani",
+	"keywords": [
+		"node",
+		"express",
+		"khanti"
+	],
+	"license": "MIT"
+}
