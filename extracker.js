@@ -13,7 +13,7 @@ const exerciseSchema = new mongoose.Schema({
 const Exercise = mongoose.model("Exercise", exerciseSchema);
 
 const userSchema = new mongoose.Schema({
-    user_name: {type: String, required: true}
+    username: {type: String, required: true}
 });
 const User = mongoose.model("User", userSchema);
 
@@ -24,17 +24,28 @@ router.get('/', (req, res) => {
 });
 
 router.post('/api/users', (req, res) => {
-    const user = {user_name: req.body.username};
+    const user = {username: req.body.username};
+    User.create(user).then(data => res.json(data));
+});
+
+router.route('/api/users')
+.get((req, res) => User.find({}).then((data) => res.json(data)))
+.post((req, res) => {
+    const user = {username: req.body.username};
     User.create(user).then(data => res.json(data));
 });
 
 router.post('/api/users/:_id/exercises', (req, res) => {
     const exercise = {...req.body};
     User.findById(req.params._id)
-    .then((user) => exercise.username = user.user_name)
-    .then(() => Exercise.create(exercise).then(ex => 
-        res.json({username: ex.username, description: ex.description, duration: ex.duration, date: ex.date.toDateString()})
-    ));
+    .then((user) => exercise.username = user.username)
+    .then(() => Exercise.create(exercise).then(ex => {
+        Exercise.find({username: user.username})
+        .then(ex => {
+            const exercises = ex.map(e => { return{description: e.description, duration: e.duration, date: e.date.toDateString()}});
+            res.json({_id: user._id, username: user.username, count: exercises.length, exercises: exercises});
+        });
+    }));
 });
 
 const LIMIT = 100;
@@ -44,11 +55,11 @@ router.get('/api/users/:_id/logs', (req, res) => {
     User.findById(req.params._id)
     .then((user) => {
         Exercise
-        .find({username: user.user_name, date: { $gte: req.query.from || FROM_DATE, $lte: req.query.to || TO_DATE}})
+        .find({username: user.username, date: { $gte: req.query.from || FROM_DATE, $lte: req.query.to || TO_DATE}})
         .limit(req.query.limit || LIMIT)
         .select({username: false, _id: false, __v: false}).then((ex) => {
             const exercises = ex.map(e => { return{description: e.description, duration: e.duration, date: e.date.toDateString()}});
-            res.json({_id: user._id, user_name: user.user_name, count: exercises.length, log: exercises});
+            res.json({_id: user._id, username: user.username, count: exercises.length, log: exercises});
         });
     });
 })
