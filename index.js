@@ -32,6 +32,9 @@ app.use("/urlshortener", urlshortenerRouter);
 const extrackerRouter = require('./extracker');
 app.use("/extracker", extrackerRouter);
 
+const filemetaRouter = require('./filemeta');
+app.use("/filemeta", filemetaRouter);
+
 // listen for requests :)
 const listener = app.listen(process.env.PORT || 3000, function () {
     console.log('Your app is listening on port ' + listener.address().port);
