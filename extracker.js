@@ -38,7 +38,7 @@ router.post('/api/users/:_id/exercises', (req, res) => {
     User.findById(req.params._id)
     .then((user) => exercise.username = user.username)
     .then(() => Exercise.create(exercise).then(ex => {
-        res.json({_id: user._id, username: user.username, description: ex.description, duration: ex.duration, date: ex.date.toDateString()});
+        res.json({_id: req.params._id, username: ex.username, description: ex.description, duration: ex.duration, date: ex.date.toDateString()});
     }))});
 
 const LIMIT = 100;
