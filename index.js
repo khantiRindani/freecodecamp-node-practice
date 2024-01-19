@@ -29,6 +29,9 @@ app.use("/headerparser", headerparserRouter);
 const urlshortenerRouter = require('./urlshortener');
 app.use("/urlshortener", urlshortenerRouter);
 
+const extrackerRouter = require('./extracker');
+app.use("/extracker", extrackerRouter);
+
 // listen for requests :)
 const listener = app.listen(process.env.PORT || 3000, function () {
     console.log('Your app is listening on port ' + listener.address().port);
