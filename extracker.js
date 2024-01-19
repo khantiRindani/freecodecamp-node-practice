@@ -23,11 +23,6 @@ router.get('/', (req, res) => {
   res.sendFile(__dirname + '/views/extracker.html');
 });
 
-router.post('/api/users', (req, res) => {
-    const user = {username: req.body.username};
-    User.create(user).then(data => res.json(data));
-});
-
 router.route('/api/users')
 .get((req, res) => User.find({}).then((data) => res.json(data)))
 .post((req, res) => {
@@ -37,16 +32,14 @@ router.route('/api/users')
 
 router.post('/api/users/:_id/exercises', (req, res) => {
     const exercise = {...req.body};
+    if (!exercise.date) {
+        exercise.date = new Date();
+    }
     User.findById(req.params._id)
     .then((user) => exercise.username = user.username)
     .then(() => Exercise.create(exercise).then(ex => {
-        Exercise.find({username: user.username})
-        .then(ex => {
-            const exercises = ex.map(e => { return{description: e.description, duration: e.duration, date: e.date.toDateString()}});
-            res.json({_id: user._id, username: user.username, count: exercises.length, exercises: exercises});
-        });
-    }));
-});
+        res.json({_id: user._id, username: user.username, description: ex.description, duration: ex.duration, date: ex.date.toDateString()});
+    }))});
 
 const LIMIT = 100;
 const FROM_DATE = '1990-01-01';
